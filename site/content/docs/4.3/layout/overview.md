@@ -132,13 +132,13 @@ We occasionally use media queries that go in the other direction (the given scre
 Once again, these media queries are also available via Sass mixins:
 
 {{< highlight scss >}}
-@include media-breakpoint-down(xs) { ... }
+// No media query necessary for xs breakpoint as it's effectively `@media (max-width: 0) { ... }`
 @include media-breakpoint-down(sm) { ... }
 @include media-breakpoint-down(md) { ... }
 @include media-breakpoint-down(lg) { ... }
-// No media query necessary for xl breakpoint as it has no upper bound on its width
+@include media-breakpoint-down(xl) { ... }
 
-// Example: Style from medium breakpoint and down
+// Example: Style below medium breakpoint
 @include media-breakpoint-down(md) {
   .custom-class {
     display: block;
@@ -146,47 +146,26 @@ Once again, these media queries are also available via Sass mixins:
 }
 {{< /highlight >}}
 
-There are also media queries and mixins for targeting a single segment of screen sizes using the minimum and maximum breakpoint widths.
+There are also media queries and mixins for targeting between breakpoints.
 
 {{< highlight scss >}}
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) { ... }
 
-// Small devices (landscape phones, 576px and up)
+// Small devices (landscape phones, between 576px and less than 768px)
 @media (min-width: 576px) and (max-width: 767.98px) { ... }
 
-// Medium devices (tablets, 768px and up)
+// Medium devices (tablets, between 768px and less than 992px)
 @media (min-width: 768px) and (max-width: 991.98px) { ... }
 
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) and (max-width: 1199.98px) { ... }
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) { ... }
+// Between small and large devices (landscape phones & tablets, between 576px and less than 992px)
+@media (min-width: 576px) and (max-width: 991.98px) { ... }
 {{< /highlight >}}
 
 These media queries are also available via Sass mixins:
 
 {{< highlight scss >}}
-@include media-breakpoint-only(xs) { ... }
-@include media-breakpoint-only(sm) { ... }
-@include media-breakpoint-only(md) { ... }
-@include media-breakpoint-only(lg) { ... }
-@include media-breakpoint-only(xl) { ... }
-{{< /highlight >}}
-
-Similarly, media queries may span multiple breakpoint widths:
-
-{{< highlight scss >}}
-// Example
-// Apply styles starting from medium devices and up to extra large devices
-@media (min-width: 768px) and (max-width: 1199.98px) { ... }
-{{< /highlight >}}
-
-The Sass mixin for targeting the same screen size range would be:
-
-{{< highlight scss >}}
-@include media-breakpoint-between(md, xl) { ... }
+@include media-breakpoint-between(sm, md) { ... }
+@include media-breakpoint-between(md, lg) { ... }
+@include media-breakpoint-between(sm, lg) { ... }
 {{< /highlight >}}
 
 ## Z-index
