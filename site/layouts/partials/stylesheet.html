@@ -13,7 +13,6 @@
 {{- if (ne .Page.Layout "examples") }}
 {{- $targetDocsCssPath := printf "/docs/%s/assets/css/docs.min.css" .Site.Params.docs_version -}}
 {{- $sassOptions := dict "targetPath" $targetDocsCssPath "outputStyle" "compressed" "enableSourceMap" true "precision" 6 }}
-{{- $postCSSOptions := dict "use" "autoprefixer" -}}
-{{- $style := resources.Get "scss/docs.scss" | toCSS $sassOptions | postCSS $postCSSOptions | minify | fingerprint }}
+{{- $style := resources.Get "scss/docs.scss" | toCSS $sassOptions | postCSS | fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink | relURL }}">
 {{- end }}
